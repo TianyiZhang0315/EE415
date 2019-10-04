@@ -3,11 +3,29 @@
 import sys
 
 
-def five_x_cubed_plus_two(num):  # function that returns 5(x^3)+2
+def five_x_cubed_plus_2(num):  # function that returns 5(x^3)+2
     return 5 * (num ** 3) + 2
 
 
-def triple_up(lst):  # return nested list group by 3 elements f([1,2,3,4]) = [[1,2,3],[4]]
+def triple_up(olst):  # return nested list group by 3 elements f([1,2,3,4]) = [[1,2,3],[4]]
+    lst = []
+    for i in range(len(olst)):
+        if type(olst[i]) == list:
+            for j in olst[i]:
+                if type(j) == list:
+                    for k in j:
+                        lst.append(k)
+                else:
+                    lst.append(j)
+            
+        else:
+            lst.append(olst[i])
+                    
+                
+                
+                
+            
+        
     new_lst = []
     last_lst = []
     mod = len(lst) % 3
@@ -45,7 +63,7 @@ def mystery_code(string):  # ord index 97 to 122 for lower, 65 to 90 for upper
 
 def future_tense(lst):
     word_lst = {'ate': 'will eat', 'am': 'will be', 'today': 'tomorrow', 'yesterday': 'tomorrow', 'is': 'will be',
-                'now': 'tomorrow'}
+                'now': 'tomorrow','did':'will do'}
     for i in range(len(lst)):
         if lst[i].lower() in word_lst:
             if i == 0:
@@ -60,9 +78,13 @@ def future_tense(lst):
 
 
 if __name__ == '__main__':
-    #sys.stdout = open("/Users/tianyizhang/EE514/a1examplesPlus.txt", "w")
-    #print('five_x_cubed_plus_two(3)=', five_x_cubed_plus_two(3))
+    
+    sys.stdout = open("C:/Users/ALLEN/Desktop/EE415/EE415/a1examplesPlus.txt", "w")
+    print('five_x_cubed_plus_2(3)-->', five_x_cubed_plus_2(3))
+    print('triple_up([2, 5, 1.5, 100, 3, 8, 7, 1, 1, 0, -2])-->',triple_up([2, 5, 1.5, 100, 3, 8, 7, 1, 1, 0, -2]))
+    print('mystery_code("abc Iz th1s Secure? n0, no, 9!")-->',mystery_code("abc Iz th1s Secure? n0, no, 9!"))
     a = future_tense(['Yesterday', 'I', 'ate', 'pasta', 'and', 'today', 'I', 'am', 'having', 'soup'])
 
     b = future_tense(['Life', 'is', 'good', 'now'])
-    print(a,b)
+    print("future_tense(['Yesterday', 'I', 'ate', 'pasta', 'and', 'today', 'I', 'am', 'having', 'soup'])-->",a)
+    print("future_tense(['Life', 'is', 'good', 'now'])-->",b)
