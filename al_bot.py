@@ -1,11 +1,15 @@
 #Al_bot
-
+#topic in topic_dict are remembered by al bot for 2 rounds.
+#general and food responses are cycle response
+#other topics respond with random choice
+#total of 15 rules marked
 from re import *   # Loads the regular expression module.
-import random
-#max(stats.items(), key=operator.itemgetter(1))[0]
-topic_dict = {'game':0, 'food': 0, 'dl': 0, 'computer': 0}
-last_topic = {'topic':'none'}
-PUNTS = ['Go on.',
+import random #load random
+topic_dict = {'game':0, 'food': 0, 'dl': 0, 'computer': 0} #topic count dict for memory
+last_topic = {'topic':'none'} #last topic for memory
+c_count_punts = [0] #count value for cycling
+c_count_food = [0]
+PUNTS = ['Go on.', #response for general(also cycle)
          'Tell me about it more.',
          'Okay.',
          'What does that mean?',
@@ -22,83 +26,76 @@ PUNTS = ['Go on.',
          'What is that?',
          'How come?'
          ]
-
-
-punt_count = 0 #define counters for remembering topics
-def check_last(topic):
+def agentName():
+    return 'Al'
+def check_last(topic): # check last topic == current or not
     return last_topic['topic'] == topic
-def assign_last(topic):
+def assign_last(topic): # assign current topic to last
     last_topic['topic'] = topic
-def call_topics():
+def call_topics(): # call random topic sentence when '' input occurs
     topics = ['let\'s talk about food.',
           'let\'s talk about video games.',
           'let\'s talk about deep learning.',
           'let\'s talk about computers.']
     return random.choice(topics)
-def reset_dic(key):
+def reset_dic(key): # add count for memory(repeat this topic for n time)
     topic_dict[key] = 2
     return
-def sub_one_dic(key):
+def sub_one_dic(key):# count for topic -1
     topic_dict[key] -= 1
     return
-def check_dic(key):
+def check_dic(key): # check topic count
     return topic_dict[key]
-def introduce():
-    print('My name is Alan. My friends call me the Al.')
-    print('Welcome to my gaming room!')
-    print('What do you want to talk about?')
+def introduce():# introduce al_bot
+    out = 'My name is Alan. My friends call me the Al.\nWelcome to my gaming room!\nWhat do you want to talk about?'
+    return out
+    
 def al():#main function
-    introduce()
-    while True:
+    print(introduce())
+    while True:#give input line
         the_input = input('TYPE HERE:>> ')
         if match('bye',the_input):
-            print('Okay, nice talking to you.')
-            return
-        respond(the_input)
+            return 'Okay, nice talking to you.'
+        respond(the_input)#call respond function
 
-def respond(the_input):
-    print(topic_dict)
+def respond(the_input):#function deal with text content
     wordlist = split(' ',remove_punctuation(the_input))
     # undo any initial capitalization:
     wordlist[0]=wordlist[0].lower()
     mapped_wordlist = you_me_map(wordlist)
     mapped_wordlist[0]=mapped_wordlist[0].capitalize()
+    #above are text process lines
     if 'game' in wordlist or 'games' in wordlist or topic_dict['game'] != 0:#rule 1 for game topic
         if check_last('game'):
             if 'fighting' in wordlist:
-                print('I like fighting games, too.')
-                return
+                return 'I like fighting games, too.'
             if 'like' in wordlist:
-                print('I am crazy about that game, too!')
-                return
+                return'I am crazy about that game, too!'
             if 'favorite' in wordlist:
-                print('My favorite game is Street Fighter')
-                return
+                return'My favorite game is Street Fighter'
             if 'pc' in wordlist:
-                print('I have built my own pc for gaming and deep learning')
-                return
+                return 'I have built my own pc for gaming and deep learning'
             if 'ps4' in wordlist:
-                print('I use to have a ps4 but I sold it when I graduated from Indiana University.')
-                return
+                return'I use to have a ps4 but I sold it when I graduated from Indiana University.'
             if 'xbox' in wordlist:
-                print('I never own a xbox.')
-                return
-            print(rand_game())
-            sub_one_dic('game')
-            return
+                return'I never own a xbox.'
+            
+            if topic_dict['game']==0:
+                reset_dic('game')
+            else:
+                sub_one_dic('game')
+            return rand_game()
             
 
         else:
             if last_topic['topic'] == 'none':
                 reset_dic('game')
                 assign_last('game')
-                print('What kind of video game do you like?')
-                return               
+                return 'What kind of video game do you like?'              
             elif check_dic(last_topic['topic']) == 0:
                 reset_dic('game')
                 assign_last('game')
-                print('What kind of video game do you like?')
-                return
+                return 'What kind of video game do you like?'
             else:
                 pass
             
@@ -106,159 +103,135 @@ def respond(the_input):
 
 
     if 'food' in wordlist or topic_dict['food'] != 0: #rule 2 for food topic
-        print(topic_dict,wordlist)
         if check_last('food'):
             if 'like' in wordlist:
-                print('I am crazy about it, too!')
-                return
+                return 'I am crazy about it, too!'
             if 'favorite' in wordlist:
-                print('My favorite food is Mexican food')
-                return
+                return 'My favorite food is Mexican food'
             if 'pizza' in wordlist:
-                print('I love pizza.')
-                return
+                return 'I love pizza.'
             if 'chinese' in wordlist:
-                print('I usually make my own Chinese food at home.')
-                return
+                return 'I usually make my own Chinese food at home.'
             if 'japanese' in wordlist:
-                print('I like takoyaki.')
-                return
+                return 'I like takoyaki.'
             if 'burger' in wordlist:
-                print('Burgers are the best.')
-                return
-            print(rand_food())
-            sub_one_dic('food')
-            return
+                return 'Burgers are the best.'
+            
+            if topic_dict['food']==0:
+                reset_dic('food')
+            else:
+                sub_one_dic('food')
+            return rand_food()
         else:
             if last_topic['topic'] == 'none':
                 reset_dic('food')
                 assign_last('food')
-                print('What kind of food do you like?')
-                return
+                return 'What kind of food do you like?'
             elif check_dic(last_topic['topic']) == 0:
                 reset_dic('food')
                 assign_last('food')
-                print('What kind of food do you like?')
-                return
+                return 'What kind of food do you like?'
             else:
                 pass
         return
     if 'deep' and 'learning' in wordlist or topic_dict['dl'] != 0: #rule 3 for deep learning topic
-        print(topic_dict,wordlist)
         if check_last('dl'):
             if 'like' in wordlist:
-                print('I like it, too!')
-                return
+                return 'I like it, too!'
             if 'favorite' in wordlist:
-                print('My favorite model is GoogLeNet')
-                return
+                return 'My favorite model is GoogLeNet'
             if 'rnn' in wordlist:
-                print('RNNs are awesome, but with some minor problems.')
-                return
+                return 'RNNs are awesome, but with some minor problems.'
             if 'data' in wordlist:
-                print('I usually search dataset on Kaggle.')
-                return
+                return 'I usually search dataset on Kaggle.'
             if 'lstm' in wordlist:
-                print('LSTM is awesome but hard to understand.')
-                return
+                return 'LSTM is awesome but hard to understand.'
             if 'cnn' in wordlist:
-                print('CNNs are good for image datasets.')
-                return
-            print(rand_dl())
-            sub_one_dic('dl')
-            return
+                return 'CNNs are good for image datasets.'
+            if topic_dict['dl']==0:
+                reset_dic('dl')
+            else:
+                sub_one_dic('dl')
+            return rand_dl()
         else:
             if last_topic['topic'] == 'none':
                 reset_dic('dl')
                 assign_last('dl')
-                print('What kind of model do you like in deep learning?')
-                return
+                return 'What kind of model do you like in deep learning?'
             elif check_dic(last_topic['topic']) == 0:
                 reset_dic('dl')
                 assign_last('dl')
-                print('What kind of model do you like in deep learning?')
-                return
+                return 'What kind of model do you like in deep learning?'
             else:
                 pass
         return
     if 'computer' in wordlist or topic_dict['computer'] != 0: #rule 4 for computer topic
-        print(topic_dict,wordlist)
         if check_last('computer'):
             if 'like' in wordlist:
-                print('I love it.')
-                return
+                return 'I love it.'
             if 'laptop' in wordlist:
-                print('I like MacOS more on laptops.')
-                return
+                return 'I like MacOS more on laptops.'
             if 'os' in wordlist:
-                print('Windows is good but sometimes it upsets me.')
-                return
+                return 'Windows is good but sometimes it upsets me.'
             if 'gpu' in wordlist:
-                print('I like good GPUs. They support both my games and work.')
-                return
+                return 'I like good GPUs. They support both my games and work.'
             if 'cpu' in wordlist:
-                print('I think good CPUs are a little expensive. ')
-                return
+                return 'I think good CPUs are a little expensive. '
             if 'drive' in wordlist:
-                print('Solid State Drive real impoves your PC')
-                return
-            print(rand_computer())
-            sub_one_dic('computer')
-            return
+                return 'Solid State Drive real impoves your PC'
+            if topic_dict['computer']==0:
+                reset_dic('computer')
+            else:
+                sub_one_dic('computer')
+            return rand_computer()
         else:
             if last_topic['topic'] == 'none':
                 reset_dic('computer')
                 assign_last('computer')
-                print('What kind of conputer do you like?')
-                return
+                return 'What kind of conputer do you like?'
             elif check_dic(last_topic['topic']) == 0:
                 reset_dic('computer')
                 assign_last('computer')
-                print('What kind of conputer do you like?')
-                return
+                return 'What kind of conputer do you like?'
             else:
                 pass
         return
     if wordlist[0]=='':#rule 5 for empty input
-        print(call_topics())
-        return
+        return call_topics()
     if wordlist[0:2] == ['i','am']:#rule 6 for 'I am...'
-        print("Tell me why you are " +\
-              stringify(mapped_wordlist[2:]) + '.')
-        return
+        out = "Tell me why you are " +\
+              stringify(mapped_wordlist[2:]) + '.'
+        return out
     if wpred(wordlist[0]): #rule 7 for questions
-        print("You tell me " + wordlist[0] + ".")
-        return
+        out = "You tell me " + wordlist[0] + "."
+        return out
     if wordlist[0:2] == ['i','have']: # rule 8 for 'I have...'
-        print("How long have you had " +\
-              stringify(mapped_wordlist[2:]) + '.')
-        return
+        out = "How long have you had " +\
+              stringify(mapped_wordlist[2:]) + '.'
+        return out
     if dpred(wordlist[0]) and wordlist[1]==['i']: #rule 9 for sentence start with
-        print('I\' not sure.')                    #[do, would ,should, can] followed by 'i'
-        return
+                          #[do, would ,should, can] followed by 'i'
+        return 'I\' not sure.'
     if dpred(wordlist[0]) and wordlist[1]==['you']: #rule 10 for sentence start with
-        print('I would rather not.')                #[do, would ,should, can] followed by 'you'
-        return
+            #[do, would ,should, can] followed by 'you'
+        return 'I would rather not.'
     if wordlist[0:3] == ['i','feel','like']:#rule 11 for 'I feel like...'
-        print("I feel the same way.")
-        return
+        return "I feel the same way."
     if 'because' in wordlist:# rule 12 for 'because' in sentence
-        print("I think you might be right.")
-        return
+        return "I think you might be right."
     
     
     if wordlist[0:2] == ['you','are']: #rule 13 for 'you are...'
-        print("You bet I am.")
-        return
+        return "You bet I am."
     if verbp(wordlist[0]): #rule 14 for a verb as the first word(exclude 'do')
-        print(random.choice["Do you want me to " +\
-              stringify(mapped_wordlist) + '?','Okay, I will do it.'])
-        return
+        out = random.choice["Do you want me to " +\
+              stringify(mapped_wordlist) + '?','Okay, I will do it.']
+        return out
     if wordlist[0:3] == ['do','you','think']: #rule 15 'do you think...'
-        print(random.choice(['Of course!', 'Sorry I can\'t agree with you on this one.']))
-        return
+        out = random.choice(['Of course!', 'Sorry I can\'t agree with you on this one.'])
+        return out
 
-    print(punt())
+    return punt()
     
 def rand_game(): # random reply when topic is game
 
@@ -269,16 +242,21 @@ def rand_game(): # random reply when topic is game
            'Tell me more about it.',
            'That is awesome.']
     return random.choice(lst)
-def rand_food(): # random reply when topic is game
+def rand_food(): # cycle reply when topic is food
 
-    lst = ['Food is the better thing you can get when you are upset.',
+    lst = ['Food is the best thing you can get when you are upset.',
            'I love cooking.',
            'Sometimes I go out and eat Chinese food with friends',
            'I mostly eat at my apartment.',
            'Tell me more about it.',
            'That is awesome.']
-    return random.choice(lst)
-def rand_dl(): # random reply when topic is game
+    if c_count_food[0] == len(lst):
+        c_count_food[0] = 1
+    else:
+        c_count_food[0] += 1
+    return lst[c_count_food[0]-1]
+
+def rand_dl(): # random reply when topic is deep learning
 
     lst = ['I have built a semantic video classifier with Tenserflow.',
            'You can do so many fun things with deep learning.',
@@ -287,7 +265,7 @@ def rand_dl(): # random reply when topic is game
            'Tell me more about it.',
            'That is awesome.']
     return random.choice(lst)
-def rand_computer(): # random reply when topic is game
+def rand_computer(): # random reply when topic is computer
 
     lst = ['I have built a PC by myself.',
            'You can do so many fun things PC.',
@@ -318,8 +296,13 @@ def dpred(w):
 
 def punt():
     'Returns one from a list of default responses.'
+    if c_count_punts[0] == len(PUNTS):
+        c_count_punts[0] = 1
+    else:
+        c_count_punts[0] += 1
+    return PUNTS[c_count_punts[0]-1]
 
-    return random.choice(PUNTS)
+
 
 CASE_MAP = {'i':'you', 'I':'you', 'me':'you','you':'me',
             'my':'your','your':'my',
@@ -343,5 +326,5 @@ def verbp(w):
                   'make', 'get', 'jump', 'write', 'type', 'fill',
                   'put', 'turn', 'compute', 'think', 'drink',
                   'blink', 'crash', 'crunch', 'add'])
-if __name__ == '__main__':
-    al()# Launch the program.
+#if __name__ == '__main__':
+#    al()# Launch the program.
