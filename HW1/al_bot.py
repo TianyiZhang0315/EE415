@@ -178,7 +178,7 @@ def respond(the_input):#function deal with text content
             if 'cpu' in wordlist:
                 return 'I think good CPUs are a little expensive. '
             if 'drive' in wordlist:
-                return 'Solid State Drive real impoves your PC'
+                return 'Solid State Drive real improves your PC'
             if topic_dict['computer']==0:
                 reset_dic('computer')
             else:
@@ -188,30 +188,30 @@ def respond(the_input):#function deal with text content
             if last_topic['topic'] == 'none':
                 reset_dic('computer')
                 assign_last('computer')
-                return 'What kind of conputer do you like?'
+                return 'What kind of computer do you like?'
             elif check_dic(last_topic['topic']) == 0:
                 reset_dic('computer')
                 assign_last('computer')
-                return 'What kind of conputer do you like?'
+                return 'What kind of computer do you like?'
             else:
                 pass
         return
     if wordlist[0]=='':#rule 5 for empty input
         return call_topics()
     if wordlist[0:2] == ['i','am']:#rule 6 for 'I am...'
-        out = "Tell me why you are " +\
+        out = "Why are you " +\
               stringify(mapped_wordlist[2:]) + '.'
         return out
     if wpred(wordlist[0]): #rule 7 for questions
         out = "You tell me " + wordlist[0] + "."
         return out
     if wordlist[0:2] == ['i','have']: # rule 8 for 'I have...'
-        out = "How long have you had " +\
+        out = "It is interesting that you have " +\
               stringify(mapped_wordlist[2:]) + '.'
         return out
     if dpred(wordlist[0]) and wordlist[1]==['i']: #rule 9 for sentence start with
                           #[do, would ,should, can] followed by 'i'
-        return 'I\' not sure.'
+        return 'I\'m not sure.'
     if dpred(wordlist[0]) and wordlist[1]==['you']: #rule 10 for sentence start with
             #[do, would ,should, can] followed by 'you'
         return 'I would rather not.'
@@ -304,7 +304,7 @@ def punt():
 
 
 
-CASE_MAP = {'i':'you', 'I':'you', 'me':'you','you':'me',
+CASE_MAP = {'i':'you', 'I':'you', 'me':'you','you':'me',#map dict
             'my':'your','your':'my',
             'yours':'mine','mine':'yours','am':'are'}
 
@@ -326,5 +326,5 @@ def verbp(w):
                   'make', 'get', 'jump', 'write', 'type', 'fill',
                   'put', 'turn', 'compute', 'think', 'drink',
                   'blink', 'crash', 'crunch', 'add'])
-#if __name__ == '__main__':
-#    al()# Launch the program.
+if __name__ == '__main__':
+    al()# Launch the program.
