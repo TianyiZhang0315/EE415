@@ -9,22 +9,18 @@ topic_dict = {'game':0, 'food': 0, 'dl': 0, 'computer': 0} #topic count dict for
 last_topic = {'topic':'none'} #last topic for memory
 c_count_punts = [0] #count value for cycling
 c_count_food = [0]
-PUNTS = ['Go on.', #response for general(also cycle)
-         'Tell me about it more.',
+PUNTS = ['Hello.', #response for general(also cycle)
          'Okay.',
+         'When can we do pokemon game.',
          'What does that mean?',
          'Would you like to talk about food next?',
          'Would you like to talk about video games next?',
          'Would you like to talk about computer next?',
          'Would you like to talk about deep learning next?',
          'I enjoy talking to you.',
-         'Cool!',
-         'I am listening.',
+         'When can we do pokemon game.',
          'That does not sound so good.',
          'That\'s right',
-         'And then?',
-         'What is that?',
-         'How come?'
          ]
 def agentName():
     return 'Al'
@@ -137,7 +133,7 @@ def respond(the_input):#function deal with text content
     if 'deep' and 'learning' in wordlist or topic_dict['dl'] != 0: #rule 3 for deep learning topic
         if check_last('dl'):
             if 'like' in wordlist:
-                return 'I like it, too!'
+                return random.choice(['I like it, too!','I don\'t like it'])
             if 'favorite' in wordlist:
                 return 'My favorite model is GoogLeNet'
             if 'rnn' in wordlist:

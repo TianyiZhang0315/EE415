@@ -1,0 +1,69 @@
+0A: Al: My name is Alan. My friends call me the Al.
+Welcome to my gaming room!
+What do you want to talk about?
+
+0B: Pikapi: My name is Pikachu, and I am a pokemon.
+I was programmed by Mingyu Wang. If you don't like
+the way I deal, contact him at myw518@uw.edu.
+How can I help you?
+
+1A: Al: Hello.[CYCLE FEATURE]
+
+1B: Pikapi: Pika~ [CYCLE FEATURE]
+
+2A: Al: Okay.[CYCLE FEATURE]
+
+2B: Pikapi: I see.[CYCLE FEATURE]
+
+3A: Al: When can we do pokemon game.
+
+3B: Pikapi: You tell me when can we do pokemon game . [RANDOM-CHOICE]
+
+4A: Al: What kind of video game do you like? [MEMORY FEATURE]
+
+4B: Pikapi: You tell me what kind of video game do me like .
+
+5A: Al: I am crazy about that game, too! [MEMORY FEATURE]
+
+5B: Pikapi: Please tell me why you are crazy about that game too.
+
+6A: Al: Video games are very productive right now. [RANDOM-CHOICE]
+
+6B: Pikapi: Okey.
+
+7A: Al: Tell me more about it.
+
+7B: Pikapi: Pika~ Tell you more about it? Let's talk about when can we do pokemon game .[MEMORY FEATURE]
+
+8A: Al: That is awesome.
+
+8B: Pikapi: I see. You tell me what kind of video game do me like .
+
+9A: Al: I am crazy about that game, too!
+
+9B: Pikapi: Okey. I understand. You tell me what kind of video game do me like .
+
+10A: Al: I am crazy about that game, too!
+
+10B: Pikapi: Pika~ I understand. Let's talk about when can we do pokemon game . [MEMORY FEATURE][RANDOM-CHOICE]
+
+11A: Al: I used to play a lot of video games with my friend at college. [MEMORY FEATURE]
+
+11B: Pikapi: I see. You used to play a lot of video games with your friend at college? You tell me when can we do pokemon game .
+
+12A: Al: I used to play a lot of video games with my friend at college.
+
+12B: Pikapi: Okey. You already said it. Could you say something else? Let's talk about what kind of video game do me like .
+
+13A: Al: I am crazy about that game, too!
+
+13B: Pikapi: Pika~ I understand. You tell me what kind of video game do me like .
+
+14A: Al: I am crazy about that game, too!
+
+14B: Pikapi: I see. I understand. Let's talk about what kind of video game do me like .
+
+15A: Al: I am crazy about that game, too!
+
+15B: Pikapi: Okey. I understand. Let's talk about what kind of video game do me like .
+
