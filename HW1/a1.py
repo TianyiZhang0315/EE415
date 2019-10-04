@@ -78,13 +78,22 @@ def future_tense(lst):
 
 
 if __name__ == '__main__':
-    
-    sys.stdout = open("C:/Users/ALLEN/Desktop/EE415/EE415/a1examplesPlus.txt", "w")
-    print('five_x_cubed_plus_2(3)-->', five_x_cubed_plus_2(3))
-    print('triple_up([2, 5, 1.5, 100, 3, 8, 7, 1, 1, 0, -2])-->',triple_up([2, 5, 1.5, 100, 3, 8, 7, 1, 1, 0, -2]))
-    print('mystery_code("abc Iz th1s Secure? n0, no, 9!")-->',mystery_code("abc Iz th1s Secure? n0, no, 9!"))
-    a = future_tense(['Yesterday', 'I', 'ate', 'pasta', 'and', 'today', 'I', 'am', 'having', 'soup'])
 
+    sys.stdout = open("/Users/tianyizhang/EE514/EE415/EE415/HW1/a1examplesPlus.txt", "w")
+    print('five_x_cubed_plus_2(3)-->', five_x_cubed_plus_2(3))
+    print('five_x_cubed_plus_2(0.1)-->', five_x_cubed_plus_2(0.1))
+    print('five_x_cubed_plus_2(100)-->', five_x_cubed_plus_2(100))
+    print('triple_up([2, 5, 1.5, 100, 3, 8, 7, 1, 1, 0, -2])-->',triple_up([2, 5, 1.5, 100, 3, 8, 7, 1, 1, 0, -2]))
+    print('triple_up([2, 5, 1.5, 100, 3])-->', triple_up([2, 5, 1.5, 100, 3]))
+    print('triple_up([2, 5, 1.5, 100, 3, 8, 7, 1, 1, 0, -2,[30,100]])-->', triple_up([2, 5, 1.5, 100, 3, 8, 7, 1, 1, 0, -2,[30,100]]))
+    print('mystery_code("abc Iz th1s Secure? n0, no, 9!")-->',mystery_code("abc Iz th1s Secure? n0, no, 9!"))
+    print('mystery_code("I like pizza.")-->', mystery_code("I like pizza."))
+    print('mystery_code("Be not afraid of greatness: some are born great, some achieve greatness and some have greatness thrust upon them.")-->', mystery_code("Be not afraid of greatness: some are born great, some achieve greatness and some have greatness thrust upon them."))
+    a = future_tense(['Yesterday', 'I', 'ate', 'pasta', 'and', 'today', 'I', 'am', 'having', 'soup'])
     b = future_tense(['Life', 'is', 'good', 'now'])
     print("future_tense(['Yesterday', 'I', 'ate', 'pasta', 'and', 'today', 'I', 'am', 'having', 'soup'])-->",a)
     print("future_tense(['Life', 'is', 'good', 'now'])-->",b)
+    c = future_tense(['Yesterday', 'I', 'did', 'the', 'dishes', 'today', 'I', 'am', 'doing', 'it', 'again'])
+    d = future_tense(['I', 'want', 'to', 'play', 'now'])
+    print("future_tense(['Yesterday', 'I', 'did', 'the', 'dishes', 'today', 'I', 'am', 'doing', 'it', 'again'])-->", c)
+    print("future_tense(['I', 'want', 'to', 'play', 'now'])-->", d)
