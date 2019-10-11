@@ -1,5 +1,5 @@
 ''' starter-file-for.py  CHANGE THIS WHEN YOU EDIT IT, TO UCS.py
-by  (YOUR NAME HERE)
+by  (Tianyi Zhang)
 
 PUT YOUR ADDITIONAL COMMENTS HERE, SUCH AS EMAIL ADDRESS, VERSION INFO, ETC>
 
@@ -23,7 +23,7 @@ import sys
 
 if sys.argv==[''] or len(sys.argv)<2:
   try:
-    import EightPuzzle as Problem
+    import FranceWithCosts as Problem
   except:
     print("Note that the EightPuzzle formulation will be used in Assignment 3, not Assignment 2")
     print("Try python3 UCS.py FranceWithCosts")
@@ -138,8 +138,9 @@ def UCS(initial_state):
   g[initial_state]=0.0
 
 # STEP 2. If OPEN is empty, output “DONE” and stop.
-  while False: # ***STUDENTS CHANGE THIS CONDITION***
+  while OPEN != []: # ***STUDENTS CHANGE THIS CONDITION***
     # LEAVE THE FOLLOWING CODE IN PLACE TO INSTRUMENT AND/OR DEBUG YOUR IMPLEMENTATION
+
     if VERBOSE: report(OPEN, CLOSED, COUNT)
     if len(OPEN)>MAX_OPEN_LENGTH: MAX_OPEN_LENGTH = len(OPEN)
 
@@ -149,22 +150,41 @@ def UCS(initial_state):
 #         If S is a goal state, output its description
     (S,P) = OPEN.delete_min()
     #print("In Step 3, returned from OPEN.delete_min with results (S,P)= ", (str(S), P))
+    distance = P
     CLOSED.append(S)
-
     if Problem.GOAL_TEST(S):
-      pass # ***STUDENTS CHANGE THE BODY OF THIS IF.***
+      print(Problem.GOAL_MESSAGE_FUNCTION(S))
+      path = backtrace(S)
+      print('Length of solution path found: ' + str(len(path) - 1) + ' edges')
+      print('The distance between start state and destination is:',str(distance))
+      return# ***STUDENTS CHANGE THE BODY OF THIS IF.***
       #HANDLE THE BACKTRACING, RECORDING THE SOLUTION AND TOTAL COST,
       # AND RETURN THE SOLUTION PATH, TOO.
     COUNT += 1
 
 # STEP 4. Generate each successor of S
 #         and if it is already on CLOSED, delete the new instance.
+    i = 0
+    while True:#find out the # of neighbors(i) for S
+      if not S.ith_neighbor_exists(i):
+        for j in range(i):
+          ne = S.move(j)#get neighbor name
+          P = S.edge_distance(ne)#get distance to neighbor
 
-
+          if ne not in CLOSED and ne not in OPEN: #make sure neighbor not in CLOSED
+            BACKLINKS[ne] = S
+            g[ne] = g[S] + P
+            OPEN.insert(ne, g[ne])
+        break
+      i+=1
+   #find links of s, and add them to open.
+   #add backtrace
    # ***STUDENTS IMPLEMENT THE GENERATION AND HANDLING OF SUCCESSORS HERE,
    # USING THE GIVEN PRIORITY QUEUE FOR THE OPEN LIST, AND
    # DETERMINING THE SHORTEST DISTANCE KNOWN SO FAR FROM THE INITIAL STATE TO
    # EACH SUCCESSOR.***
+
+
 
   # STEP 6. Go to Step 2.
   return None  # No more states on OPEN, and no goal reached.

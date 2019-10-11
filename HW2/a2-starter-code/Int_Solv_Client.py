@@ -58,7 +58,7 @@ Do you wish to continue exploring?
     for i in range(len(OPERATORS)):
       if applicability_vector[i]:
         print(str(i)+": "+OPERATORS[i].name)
-    command = input("Enter command: 0, 1, 2, etc. for operator; B-back; H-help; Q-quit. >> ")
+    command = input("Enter command: 0, 1, 2, 3, etc. for operator; B-back; H-help; Q-quit. >> ")
     if command=="B" or command=="b": 
       if len(STATE_STACK)>1:
         STATE_STACK.pop()
